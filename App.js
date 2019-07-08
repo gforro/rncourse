@@ -6,20 +6,14 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Button, Platform, StyleSheet, Text, TextInput, View} from 'react-native';
-import ListItem from './src/components/ListItem/ListItem';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import PlaceInput from "./src/components/PlaceInput/PlaceInput";
+import List from "./src/components/List/List";
 
 const App = () => {
   const [place, setPlace] = React.useState('');
-  const [places, setPlaces] = React.useState(['1st place', '2nd place']);
+  const [places, setPlaces] = React.useState([]);
 
   const placeChangedHandler = (value) => setPlace(value);
   const placeAddedHandler = () => {
@@ -30,13 +24,8 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput value={place} onChangeText={placeChangedHandler} placeholder="A nice place" style={styles.placeInput} />
-        <Button title="Add" onPress={placeAddedHandler} style={styles.placeButton} />
-      </View>
-      <View style={styles.items}>
-        {places.map((p, i) => <ListItem place={p} key={i} />)}
-      </View>
+      <PlaceInput onPlaceAdded={placeAddedHandler} onPlaceChanged={placeChangedHandler} place={place} />
+      <List places={places} />
     </View>
   );
 }
@@ -49,19 +38,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#FFF',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-  },
-  placeInput: {
-    width: '70%'
-  },
-  placeButton: {
-    width: '30%'
-  },
-  items: {
-    width: '95%'
   }
 });
