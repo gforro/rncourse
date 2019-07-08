@@ -9,23 +9,17 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import PlaceInput from "./src/components/PlaceInput/PlaceInput";
-import List from "./src/components/List/List";
+import PlaceList from "./src/components/PlaceList/PlaceList";
 
 const App = () => {
-  const [place, setPlace] = React.useState('');
   const [places, setPlaces] = React.useState([]);
 
-  const placeChangedHandler = (value) => setPlace(value);
-  const placeAddedHandler = () => {
-    if (place && place.trim()) {
-      setPlaces(prevPlaces => prevPlaces.concat(place.trim()));
-    }
-  };
+  const placeAddedHandler = (place) => setPlaces(prevPlaces => prevPlaces.concat(place.trim()));
 
   return (
     <View style={styles.container}>
-      <PlaceInput onPlaceAdded={placeAddedHandler} onPlaceChanged={placeChangedHandler} place={place} />
-      <List places={places} />
+      <PlaceInput onPlaceAdded={placeAddedHandler} />
+      <PlaceList places={places} />
     </View>
   );
 }
@@ -38,5 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#FFF',
+    padding: 5
   }
 });

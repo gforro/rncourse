@@ -1,11 +1,20 @@
 import React from 'react';
 import {Button, StyleSheet, TextInput, View} from "react-native";
 
-const PlaceInput = ({onPlaceChanged, onPlaceAdded, place}) => {
+const PlaceInput = ({onPlaceAdded}) => {
+    const [place, setPlace] = React.useState('');
+    const placeChangedHandler = (value) => setPlace(value);
+
+    const placeAddedHandler = () => {
+        if (place && place.trim()) {
+            onPlaceAdded(place);
+        }
+    };
+
     return (
         <View style={styles.inputContainer}>
-            <TextInput value={place} onChangeText={onPlaceChanged} placeholder="A nice place" style={styles.placeInput} />
-            <Button title="Add" onPress={onPlaceAdded} style={styles.placeButton} />
+            <TextInput value={place} onChangeText={placeChangedHandler} placeholder="A nice place" style={styles.placeInput} />
+            <Button title="Add" onPress={placeAddedHandler} style={styles.placeButton} />
         </View>
     );
 };
@@ -16,7 +25,8 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'space-between',
+        width: '100%'
     },
     placeInput: {
         width: '70%'

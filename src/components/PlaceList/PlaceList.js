@@ -2,7 +2,7 @@ import React from 'react';
 import ListItem from "../ListItem/ListItem";
 import {StyleSheet, View} from "react-native";
 
-const List = ({places}) => {
+const PlaceList = ({places}) => {
     return (
         <View style={styles.items}>
             {places.map((place, i) => <ListItem place={place} key={i} />)}
@@ -10,10 +10,10 @@ const List = ({places}) => {
     );
 };
 
-export default List;
+export default PlaceList;
 
 const styles = StyleSheet.create({
     items: {
-        width: '95%'
+        width: '100%'
     }
 });
