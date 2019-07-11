@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from "react-native";
 import PlaceList from "../components/PlaceList/PlaceList";
 import {connect} from "react-redux";
-import useSideDrawer from "./useSideDrawer";
+import useSideDrawer from "../components/hooks/useSideDrawer";
 import {deletePlace} from "../store/actions";
 
 const mapStateToProps = state => ({
